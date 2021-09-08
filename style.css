@@ -11,3 +11,10 @@ table, th, td
 th {
     font-weight:bold;
 }
+.about {
+    margin: 0;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+} 

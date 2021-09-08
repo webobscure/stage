@@ -8,9 +8,15 @@
     <title>Document</title>
 </head>
 <body>
-    <input type="button" onclick="createTableFromJSON()" value="Create Table From JSON" />
-    <p id="showData"></p>
+    <table class="table table-striped">
+        <tr>
+            <th class="firstName">Name</th>
+            <th class="secondName">Second name</th>
+            <th class="about">about</th>
+            <th class="eyeColor">eye color</th>
+        </tr>
+        <tbody id="myTable"></tbody>
+    </table>
 </body>
-<script src="users.json"></script>
-<script src="index.js"></script>
+<script src="script.js"></script>
 </html>

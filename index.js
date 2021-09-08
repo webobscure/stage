@@ -518,9 +518,9 @@ function createTableFromJSON() {
   var table = document.createElement("table")
   var tr = table.insertRow(-1)
 
-  for (var i = 0;i < col.length; i++) {
-      var th = document.createElement("th")
-      th.innerHTML = col[i]
+  for (let oneCol of col) {
+      let th = document.createElement("th")
+      th.innerHTML = oneCol
       tr.appendChild(th)
   }
   // add json data
@@ -531,9 +531,8 @@ function createTableFromJSON() {
           var tabCell = tr.insertCell(-1)
           tabCell.innerHTML = users[i][col[j]]
           tabCell.classList.add(col[j])
+          
         
-          idTable = document.getElementsByClassName("id")
-          idTable.style = "none"
         }
   }
 
