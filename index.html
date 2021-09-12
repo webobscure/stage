@@ -9,14 +9,28 @@
 </head>
 <body>
     <table class="table table-striped">
-        <tr>
-            <th class="firstName">Name</th>
+        <tr class="nameTables">
+            <th class="firstName" }>
+                Name 
+                <!--<button onclick="sortTable()"></button> -->
+            </th>
             <th class="secondName">Second name</th>
             <th class="about">about</th>
             <th class="eyeColor">eye color</th>
         </tr>
         <tbody id="myTable"></tbody>
     </table>
+
+    <div class='form-wrapper'>
+        <form action="" class='form'>
+          <p>Имя: <input type="text"></p>
+          <p>Фамилия: <input type="text"></p>
+          <p>Описание: <textarea name="about" cols="30" rows="5"></textarea></p>
+          <p>Цвет глаз: <input type="text"></p>
+        </form>
+        <button class='btn-edit'>Редактировать</button>
+        <button class='btn-close'>Отмена</button>
+      </div>
 </body>
 <script src="script.js"></script>
 </html>

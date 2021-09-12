@@ -1,20 +1,28 @@
 th, td, p, input {
     font:14px Verdana;
 }
-table, th, td 
-{
-    border: solid 1px #DDD;
-    border-collapse: collapse;
-    padding: 2px 3px;
-    text-align: center;
-}
-th {
-    font-weight:bold;
-}
+table {
+    border-spacing: 0;
+    width: 50%;
+    border: 1px solid #000;
+    margin-left: 350px;
+  }
+  
+  th, td {
+    text-align: left;
+    padding: 16px;
+  }
+
+  
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2
+  }
 .about {
-    margin: 0;
     -webkit-line-clamp: 2;
+    height: 20px;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    margin-bottom: 3px;
 } 
