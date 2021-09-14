@@ -1,3 +1,4 @@
+
 let myArray = [
     {
       "id": "5c2286fb23e87be312d55d9a",
@@ -501,21 +502,25 @@ let myArray = [
     }
   ]
 
+  
 
   buildTable(myArray)
 
   function buildTable(data) {
+      localStorage.setItem('jsonData', JSON.stringify(myArray))
+
       let table = document.getElementById("myTable")
       for (let i = 0; i < data.length; i++) {
           let row = `<tr>
-          <td class='firstName'>${data[i].name.firstName}</td>
-          <td class='secondName'>${data[i].name.lastName}</td>
-          <td class='about'>${data[i].about} </td>
-          <td class='eye-color' style="background-color: ${data[i].eyeColor}; color: ${data[i].eyeColor};">${data[i].eyeColor}</td>
+          <td class='firstName'  >${data[i].name.firstName}</td>
+          <td class='secondName'  >${data[i].name.lastName}</td>
+          <td class='about'  >${data[i].about} </td>
+          <td class='eye-color'  style="background:${data[i].eyeColor}; color:${data[i].eyeColor}" >${data[i].eyeColor}</td>
           </tr>`
           table.innerHTML += row
         }
-
+        
+        
   }
 
   th = document.getElementsByTagName("th")
@@ -533,8 +538,11 @@ let myArray = [
     }
   }
 
+ 
+  
+
   function sortTable(c) {
-    var table, rows, switching, i, x, y, shouldSwitch;
+    let table, rows, switching, i, x, y, shouldSwitch;
     table = document.getElementById("myTable");
     switching = true;
     /*Make a loop that will continue until
@@ -568,7 +576,24 @@ let myArray = [
     }
   }
 
-  //Форма редактирования
+
+function splitArray(arr, arraySize = 10) {
+//функция разибвать массив на подмассивы и записывает их в новый массив
+
+  const subarray = [],
+        subarrayAmount = Math.ceil(arr.length / arraySize);
+  
+  for (let i = 0; i < subarrayAmount; i++) {
+    subarray[i] = arr.slice((i * arraySize), (i * arraySize) + arraySize);
+  }
+  
+  return subarray;
+}
+
+
+
+
+
 function editTableData() {
   const table = document.querySelector('table'),
         editForm = document.querySelector('.form-wrapper'),
@@ -598,7 +623,9 @@ function editTableData() {
   
   //При нажатии на кнопку редактирования btnEdit содержимое ячеек строки заменяется на содержимое формы
   btnEdit.addEventListener('click', () => {    
+    const jsonData = JSON.parse( localStorage.getItem('jsonData') );
     //узнаем длину массива, что бы узнать arraySize из функции splitArray. На случай если сделаю чтобы юзер задавал значение arraySize
+    const rowAmount = splitArray(jsonData.JSON).length; 
     const editedRow = {
       id: CHANGE_ROW.id ,
       name: {
@@ -619,12 +646,12 @@ function editTableData() {
       }
     })
 
-    localStorage.setItem('jsonData', JSON.stringify(jsonData));
     editForm.style='';
 
-    renderCell(jsonData, Math.ceil(editedRowIndex / (jsonData.JSON.length / rowAmount))); // (jsonData.length / rowAmount) - arraySize из функции splitArray
+    renderCell(myArray, Math.ceil(editedRowIndex / (myArray.length / rowAmount))); // (jsonData.length / rowAmount) - arraySize из функции splitArray
   });
 
   btnClose.addEventListener('click', () => editForm.style=''); // закрывает форму редактирования.
 }
+
 

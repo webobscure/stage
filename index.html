@@ -4,15 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./style.css">
     <title>Document</title>
 </head>
 <body>
+      <button class="btn-hidden_all ">Скрыть все колонки</button>
+      <button class='btn-hidden'>Имя<span class='hidden-column' data-hidden = 'off'></span></button>
+      <button class='btn-hidden'>Фамилия<span class='hidden-column' data-hidden = 'off'></span></button>
+      <button class='btn-hidden'>Описание<span class='hidden-column' data-hidden = 'off'></span></button>
+      <button class='btn-hidden'>Цвет глаз<span class='hidden-column' data-hidden = 'off'></span></button>
     <table class="table table-striped">
-        <tr class="nameTables">
-            <th class="firstName" }>
+        <tr class="nameTables" onclick="editTableData()">
+            <th class="firstName" >
                 Name 
-                <!--<button onclick="sortTable()"></button> -->
+                
             </th>
             <th class="secondName">Second name</th>
             <th class="about">about</th>
@@ -33,4 +38,5 @@
       </div>
 </body>
 <script src="script.js"></script>
+<script type="application/json" src="users.json></script>
 </html>
