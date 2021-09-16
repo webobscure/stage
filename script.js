@@ -1,4 +1,3 @@
-
 let myArray = [
   {
     "id": "5c2286fb23e87be312d55d9a",
@@ -502,32 +501,96 @@ let myArray = [
   }
 ]
 
-
-
 buildTable(myArray)
-
+let table = document.getElementById('myTable')
 function buildTable(jsonData) {
   localStorage.getItem('jsonData') ? '' : localStorage.setItem('jsonData', JSON.stringify(jsonData));
   const data = localStorage.getItem('jsonData') ? JSON.parse(localStorage.getItem('jsonData')) : jsonData
   let table = document.getElementById("myTable")
+  let tableContent = ''
   for (let i = 0; i < data.length; i++) {
-    let row = `<tr class='id' id=${data[i].id}>
-          <td class='firstName'  >${data[i].name.firstName}</td>
-          <td class='secondName'  >${data[i].name.lastName}</td>
-          <td class='about'  >${data[i].about} </td>
-          <td class='eye-color'  style="background:${data[i].eyeColor}; color:${data[i].eyeColor}" >${data[i].eyeColor}</td>
+    let row = `<tr  data-index='${i}'>
+          <td class='firstName'  data-index='${i}'>${data[i].name.firstName}</td>
+          <td class='secondName'  data-index='${i}'>${data[i].name.lastName}</td>
+          <td class='about'  data-index='${i}'>${data[i].about} </td>
+          <td class='eye-color' data-index='${i}' style="background:${data[i].eyeColor}; color:${data[i].eyeColor}" >${data[i].eyeColor}</td>
           </tr>`
-    table.innerHTML += row
+          tableContent = tableContent + row
+  }
+  table.innerHTML = tableContent
+}
+
+
+function fillEditForm(firstName, lastName, about, eyeColor, index) { // заполняет форму данными из таблицы
+  const $firstName = document.querySelector("#firstName");
+  const $lastName = document.querySelector("#lastName");
+  const $about = document.querySelector("#about");
+  const $eyeColor = document.querySelector("#eyeColor");
+  const $index = document.querySelector("#index-input");
+  $firstName.value = firstName;
+  $lastName.value = lastName;
+  $about.value = about;
+  $eyeColor.value = eyeColor;
+  $firstName.value = firstName;
+  $index.value = index;
+}
+
+function clearEditForm(firstName, lastName, about, eyeColor, index) { // очищает форму
+  const $firstName = document.querySelector("#firstName");
+  const $lastName = document.querySelector("#lastName");
+  const $about = document.querySelector("#about");
+  const $eyeColor = document.querySelector("#eyeColor");
+  const $index = document.querySelector("#index-input");
+  $firstName.value = '';
+  $lastName.value = '';
+  $about.value = '';
+  $eyeColor.value = '';
+  $firstName.value = '';
+  $index.value = '';
+}
+table.addEventListener('click', (event)=>{
+  let index = event.target.getAttribute("data-index");
+  
+  if (index){
+    console.log(event);
+    console.log(index);
+    console.log(myArray[index]);
+    const {
+      name,
+       
+      about, 
+      eyeColor
+      } = myArray[index];
+      
+      fillEditForm(name.firstName, name.lastName, about, eyeColor, index)
+  }
+ 
+})
+
+function saveData() {
+  const $firstName = document.querySelector("#firstName");
+  const $lastName = document.querySelector("#lastName");
+  const $about = document.querySelector("#about");
+  const $eyeColor = document.querySelector("#eyeColor");
+  const $index = document.querySelector("#index-input");
+  let index = $index.value
+  console.log(index);
+  let newElement = myArray[index]
+  newElement.name.firstName = $firstName.value;
+  newElement.name.lastName = $lastName.value;
+  newElement.about = $about.value;
+  newElement.eyeColor = $eyeColor.value;
+  console.log(newElement);
+  myArray[index] = newElement;
+  localStorage.setItem('jsonData', JSON.stringify(myArray))
+  buildTable(myArray)
+
+  clearEditForm()
   }
 
 
-}
 
-th = document.getElementsByTagName("th")
-
-for (c = 0; c < th.length; c++) {
-  th[c].addEventListener("click", item(c))
-}
+document.getElementById('btn-edit').addEventListener('click', saveData)
 
 
 function item(c) {
@@ -536,9 +599,6 @@ function item(c) {
     sortTable(c)
   }
 }
-
-
-
 
 function sortTable(c) {
   let table, rows, switching, i, x, y, shouldSwitch;
@@ -574,27 +634,3 @@ function sortTable(c) {
     }
   }
 }
-
-let table = document.getElementById('myTable'), rIndex
-let inputs = document.querySelectorAll('input')
-let textarea = document.querySelector('textarea')
-
-for (let i = 0; i < table.rows.length; i++) {
-  table.rows[i].onclick = function () {
-    rIndex = this.rowIndex
-    console.log(rIndex);
-    inputs[0].value = this.cells[0].innerHTML;
-    inputs[1].value = this.cells[1].innerHTML;
-    textarea.value = this.cells[2].innerHTML;
-    inputs[2].value = this.cells[3].innerHTML;
-  };
-}
- 
-function editTableRow(jsonData) {
-  localStorage.setItem('firstName', inputs[0].value)
-  localStorage.setItem('secondName', inputs[1].value)
-  localStorage.setItem('about', textarea.value)
-  localStorage.setItem('eyeColor', inputs[2].value)
-  
-
-} 
